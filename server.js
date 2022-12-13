@@ -250,7 +250,7 @@ function checkNotAuthenticated(request, response, next) {
 }
 
 function isAdmin(request, response, next) {
-    if (request.isAuthenticated() && request.user.UserID === true) {
+    if (request.isAuthenticated() && request.user.Admin === true) {
         return next()
     } else {
         return response.redirect("/");
