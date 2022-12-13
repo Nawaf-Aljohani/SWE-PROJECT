@@ -84,6 +84,7 @@ passport.deserializeUser(function (id, done) {
 app.get("/", function (request, response) {
     connect();
     response.render("index.ejs", { isUserLoggedIn: request.isAuthenticated() });
+    console.log(request.user)
 });
 
 
@@ -102,7 +103,7 @@ app.get("/About", function (request, response) {
     response.render("About.ejs")
 });
 
-app.get("/Careers", function (request, response) {
+app.get("/Careers", isAdmin,function (request, response) {
     response.render("Careers.ejs")
 });
 
@@ -114,11 +115,11 @@ app.get('/profile', checkNotAuthenticated, function (request, response) {
     response.render('profile.ejs');
 });
 app.get("/personal_Info", checkNotAuthenticated, function (request, response) {
-    User.findById(request.user.id, function(err,data){
-        if(err) console.log(err)
-        if(data) 
-        console.log(data)
-        response.render("personal_Info.ejs",{x:data.email})
+    User.findById(request.user.id, function (err, data) {
+        if (err) console.log(err)
+        if (data)
+            console.log(data)
+        response.render("personal_Info.ejs", { x: data.email })
 
     })
 
@@ -154,7 +155,7 @@ app.post("/SignUp", async function (request, response) {
             return;
         }
 
-        //test1
+
         const hashedPassword = await bcrypt.hash(request.body.password, 10)
         const newUser = new User({
             UserID: Date.now().toString(),
@@ -174,7 +175,6 @@ app.post("/SignUp", async function (request, response) {
     } catch {
         response.redirect("/SignUp")
     }
-    console.log(users);
 });
 
 
@@ -224,6 +224,16 @@ function checkNotAuthenticated(request, response, next) {
 
 
 }
+
+function isAdmin(request, response, next) {
+    if (request.isAuthenticated() && request.user.email === "a1@gmail.com") {
+        return next()
+    } else {
+        return response.redirect("/");
+    }
+}
+
+
 
 
 
