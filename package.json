@@ -14,6 +14,7 @@
     "express": "^4.18.2"
   },
   "dependencies": {
+    "alert": "^5.1.3",
     "bcrypt": "^5.1.0",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",

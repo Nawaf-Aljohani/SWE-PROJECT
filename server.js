@@ -79,6 +79,68 @@ passport.deserializeUser(function (id, done) {
 
 
 
+let alert = require('alert');
+
+app.get("/Add_Room", isAdmin, function (request, response) {
+    connect();
+    response.render("Add_Room.ejs");
+
+});
+
+app.post("/Add_Room", async function (request, response) {
+    const exists = await Rooms.exists({ roomNum: request.body.roomNumber })
+    if (exists) {
+        response.redirect("/Add_Room");
+        alert("Room already exists")
+        return;
+    }
+    const newRoom = new Rooms(
+        {
+            roomNum: request.body.roomNumber,
+            discribtion: request.body.desc,
+            type: request.body.room_type,
+        })
+    newRoom.save();
+    alert("Room added")
+    response.redirect("/Add_Room")
+
+
+});
+
+
+app.get("/delete_Room", isAdmin, function (request, response) {
+    connect();
+    response.render("delete_Room.ejs");
+
+});
+
+app.post("/delete_Room", async function (request, response) {
+
+    const exists = await Rooms.exists({ roomNum: request.body.roomNumber })
+
+    if (exists) {
+        roomNumberx = await Rooms.find({ roomNum: request.body.roomNumber })
+        if (!roomNumberx[0].Reserved) {
+            await Rooms.deleteOne({ roomNum: request.body.roomNumber });
+            alert("Room deleted")
+        } else {
+            alert("Room cannot be deleted (it is reserved)")
+
+        }
+    }
+    else {
+        alert("No rooms with that number")
+
+    }
+    response.redirect("/delete_Room")
+
+
+});
+
+
+
+
+
 
 app.get("/", function (request, response) {
     connect();
@@ -97,7 +159,7 @@ app.get("/SignUp", checkAuthenticated, function (request, response) {
 });
 
 
-app.get("/About", isAdmin, function (request, response) {
+app.get("/About", function (request, response) {
     response.render("About.ejs")
 });
 
@@ -133,7 +195,7 @@ app.get("/personal_Info", checkNotAuthenticated, function (request, response) {
 
 });
 app.get("/Reservation", checkNotAuthenticated, function (request, response) {
-    
+
     response.render("Reservation.ejs")
 });
 app.get("/payment", checkNotAuthenticated, function (request, response) { // we need to check if the customer has chosen a room before going to this page
