@@ -11,7 +11,7 @@ const UserSchema = new Schema({
         required:true
 
     },
-    /*
+
     FName:{
 
         type:String,
@@ -30,31 +30,30 @@ const UserSchema = new Schema({
         required:true
 
     },
-    */
     email:{
 
         type:String,
         required:true
 
     },
-    // Country:{
+    Country:{
 
-    //     type:String,
-    //     required:true
+        type:String,
+        required:true
 
-    // },
-    // Address:{
+    },
+    Address:{
 
-    //     type:String,
-    //     required:true
+        type:String,
+        required:true
 
-    // },
-    // Postal_Code:{
+    },
+    Postal_Code:{
 
-    //     type:String,
-    //     required:true
+        type:String,
+        required:true
 
-    // },
+    },
     password:{
 
         type:String,
