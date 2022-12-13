@@ -3,45 +3,20 @@ const Schema   = mongoose.Schema;
 
 const RoomSchema = new Schema({
 
-    name:{
+    roomNum:{
+        type:Number
+    },
+    discribtion:{
         type:String,
         required:true
+
     },
     type:{
 
         type:String,
         required:true
 
-    },
-
-    city:{
-
-        type:String,
-        required:true
-
-    },
-
-    address:{
-
-        type:String,
-        required:true
-
-
-    },
-    photos:{
-
-        type:[String]
-      
-    },
-    describtion:{
-
-        type:String,
-        required:true
-    },
-    rooms:{
-
-        type:[String]
-    },
+    },  
     Reserved:{
         type:Boolean,
         default:false
@@ -51,4 +26,5 @@ const RoomSchema = new Schema({
 
 });
 
-//export default mongoose.model('Room',RoomSchema);
+const Room = mongoose.model('Room',RoomSchema);
+module.exports = Room;

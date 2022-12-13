@@ -13,28 +13,22 @@ const bookingSchema = new Schema({
         type:Number,
         required:true
     },
-    Room_Describtion:{
+    
+    Check_in:{
 
         type:String,
         required:true
 
     },
-    Check_in:{
-
-        type:Date,
-        required:true
-
-    },
     Check_out:{
 
-        type:Date,
+        type:String,
         required:true
-
 
     }
 
     
 
 });
-
-//export default mongoose.model('Book',bookingSchema);
+const Booking = mongoose.model('Booking',bookingSchema);
+module.exports = Booking;

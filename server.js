@@ -12,11 +12,12 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 const User = require('./models/user.js')
 const Rooms = require('./models/Rooms.js')
-const Bookings = require('./models/Bookings.js')
+const booking = require('./models/bookings.js')
 const { render } = require('ejs')
 
+//mongodb+srv://admin:admin@cluster0.3yhleww.mongodb.net/?retryWrites=true&w=majority
 
-mongoose.set('strictQuery', true);
+mongoose.set('strictQuery', false);
 const connect = async () => {
     try {
         await mongoose.connect(process.env.dbURI);
@@ -28,7 +29,6 @@ const connect = async () => {
 
 
 
-// const users = []; //must save in a db
 const hostname = "127.0.0.1";
 const port = 8000;
 
@@ -44,7 +44,6 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-//app.use(express.json);
 app.use(methodOverride('_method'))
 
 const LocalStrategy = require('passport-local').Strategy
@@ -84,7 +83,6 @@ passport.deserializeUser(function (id, done) {
 app.get("/", function (request, response) {
     connect();
     response.render("index.ejs", { isUserLoggedIn: request.isAuthenticated() });
-    console.log(request.user)
 });
 
 
@@ -99,11 +97,11 @@ app.get("/SignUp", checkAuthenticated, function (request, response) {
 });
 
 
-app.get("/About", function (request, response) {
+app.get("/About", isAdmin, function (request, response) {
     response.render("About.ejs")
 });
 
-app.get("/Careers", isAdmin,function (request, response) {
+app.get("/Careers", function (request, response) {
     response.render("Careers.ejs")
 });
 
@@ -117,31 +115,40 @@ app.get('/profile', checkNotAuthenticated, function (request, response) {
 app.get("/personal_Info", checkNotAuthenticated, function (request, response) {
     User.findById(request.user.id, function (err, data) {
         if (err) console.log(err)
-        if (data)
-            console.log(data)
-        response.render("personal_Info.ejs", { x: data.email })
 
+        if (data) {
+            return response.render("personal_Info.ejs",
+                {
+                    userEmail: data.email,
+                    userPhone: data.Phone_Number,
+                    userFname: data.FName,
+                    userLname: data.LName,
+                    userCountry: data.Country,
+                    userAddress: data.Address,
+                    userPostal: data.Postal_Code
+                })
+        }
     })
-
 
 
 });
 app.get("/Reservation", checkNotAuthenticated, function (request, response) {
+    
     response.render("Reservation.ejs")
 });
 app.get("/payment", checkNotAuthenticated, function (request, response) { // we need to check if the customer has chosen a room before going to this page
     response.render("payment.ejs")
 });
 app.get('/Bookings', function (request, response) {
+    // HERE SALEH!!!
+    // console.log(request.user.userID)
+    // booking.find(UserID: )
     response.render('Bookings.ejs');
 
 });
 
 
 app.post("/Index", checkNotAuthenticated, function (request, response) {
-    console.log(request.body.guestNumber)
-    console.log(request.body.dateOut)
-    console.log(request.body.dateIn)
     response.redirect("/Reservation")
 });
 
@@ -160,17 +167,18 @@ app.post("/SignUp", async function (request, response) {
         const newUser = new User({
             UserID: Date.now().toString(),
             email: request.body.email,
-            password: hashedPassword
-        })
+            password: hashedPassword,
+            Phone_Number: request.body.Phone_Number,
+            FName: request.body.FName,
+            LName: request.body.LName,
+            Country: request.body.Country,
+            Address: request.body.Address,
+            Postal_Code: request.body.Postal_Code
 
+
+        })
         newUser.save();
 
-        // users.push({
-        //     id: Date.now().toString(),
-        //     email: request.body.email,
-        //     password: hashedPassword
-
-        // });
         response.redirect("/logIn")
     } catch {
         response.redirect("/SignUp")
@@ -185,11 +193,27 @@ app.post("/logIn", passport.authenticate("local", {
 }));
 
 
-app.post("/payment", checkNotAuthenticated, function (request, response) {
-    console.log(request.body)
+app.post("/payment", checkNotAuthenticated, async function (request, response) {
+    const RoomType = request.body.Room_type;
+
+    try {
+        let RoomData = await Rooms.findOne({ type: RoomType, Reserved: false })
+        await Rooms.findByIdAndUpdate(RoomData.id, { Reserved: true })
+        const newBooking = new booking(
+            {
+                UserID: request.user.UserID,
+                Room_Number: RoomData.roomNum,
+                Check_in: request.body.Check_in,
+                Check_out: request.body.Check_out
+            })
+
+        const saveBooking = await newBooking.save();
+    } catch (error) {
+        console.log("Rooms full") // fix this later
+    }
+    response.redirect("/")
+
 });
-
-
 
 app.delete('/logout', (request, response) => {
     request.logOut(function (error) {
@@ -226,22 +250,9 @@ function checkNotAuthenticated(request, response, next) {
 }
 
 function isAdmin(request, response, next) {
-    if (request.isAuthenticated() && request.user.email === "a1@gmail.com") {
+    if (request.isAuthenticated() && request.user.UserID === true) {
         return next()
     } else {
         return response.redirect("/");
     }
-}
-
-
-
-
-
-function dateDiffInDays(a, b) {
-    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-    // Discard the time and time-zone information.
-    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
-    return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }

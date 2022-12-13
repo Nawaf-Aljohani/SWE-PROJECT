@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Personal_info</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    
+
     <link rel="stylesheet" href="profile.css">
-  
+
 </head>
 
 <body>
@@ -16,34 +17,34 @@
     <div class="sidebar">
 
         <div class="logo_content">
-          <div class="logo">
-             <i class='bx bxs-user-account'></i> 
-             <div class="logo_name">Profile</div>
-             
-          </div>
-          <i class='bx bx-menu' id="btn"></i>
-          
+            <div class="logo">
+                <i class='bx bxs-user-account'></i>
+                <div class="logo_name">Profile</div>
+
+            </div>
+            <i class='bx bx-menu' id="btn"></i>
+
 
         </div>
         <ul class="nav_list">
             <li>
                 <a href="/">
-                    <i class='bx bx-home' ></i>
+                    <i class='bx bx-home'></i>
                     <span class="links_name">Homepage</span>
                 </a>
-                
+
             </li>
             <li>
                 <a href="/Bookings">
                     <i class='bx bxs-hotel'></i>
                     <span class="links_name">Bookings</span>
                 </a>
-                
+
             </li>
-            
-            
+
+
         </ul>
-          
+
     </div>
 
     <div class="profile_content">
@@ -53,54 +54,59 @@
             <h1>Profile Information</h1>
             <div class="info-box">
                 <form action="#">
-                   <div class="grid-container">
-                    <div class="grid-item-1">
-                        <label>First Name <strong>:</strong> </label>
-                        <span class="First_Name">ANAS</span>
-                        <!-- <input type="text" placeholder="Enter your First Name" required> -->
+                    <div class="grid-container">
+                        <div class="grid-item-1">
+                            <label>First Name <strong>:</strong> </label>
+                            <span class="First_Name">
+                                <%= userFname %>
+                            </span>
+                            <!-- <input type="text" placeholder="Enter your First Name" required> -->
+                        </div>
+                        <div class="gris-item-2">
+                            <label>Last Name <strong>:</strong> </label>
+                            <span class="Last_Name">
+                                <%= userLname %>
+                            </span>
+                            <!-- <input type="text" placeholder="Enter your Last Name" required> -->
+                        </div>
+                        <div class="grid-item-4">
+                            <label>Email <strong>:</strong></label>
+                            <span class="Email">
+                                <%= userEmail %>
+                            </span>
+                            <!-- <input type="email" placeholder="Enter your Email" required>  -->
+                        </div>
+                        <div class="grid-item-5">
+                            <label>Phone Number <strong>:</strong></label>
+                            <span class="Phone_number">
+                                <%= userPhone %>
+                            </span>
+                        </div>
+                        <div class="grid-item-6">
+                            <label>Country<strong>:</strong></label>
+                            <span class="Country">
+                                <%= userCountry %>
+                            </span>
+                        </div>
+                        <div class="grid-item-7">
+                            <label>Address<strong>:</strong></label>
+                            <span class="Address">
+                                <%= userAddress %>
+                            </span>
+                        </div>
+                        <div class="grid-item-8">
+                            <label>Zip<strong>:</strong></label>
+                            <span class="Zip">
+                                <%= userPostal %>
+                            </span>
+                        </div>
                     </div>
-                    <div class="gris-item-2">
-                    <label>Last Name <strong>:</strong> </label>
-                    <span class="Last_Name">ALASIRI</span>
-                    <!-- <input type="text" placeholder="Enter your Last Name" required> -->
-                    </div>
-                    <div class="grid-item-3">
-                        <label>Date of Birth <strong>:</strong><label>
-                        <span class="Birth_date">27/7/1999</span>
-                        <!-- <input type="date" placeholder="Enter Birth Date" required>  -->
-                    </div>
-                    <div class="grid-item-4">
-                        <label>Email <strong>:</strong><%= x %></label>
-                        <span class="Email"></span>
-                        <!-- <input type="email" placeholder="Enter your Email" required>  -->
-                    </div>
-                    <div class="grid-item-5">
-                        <label>Phone Number <strong>:</strong></label>
-                        <span class="Phone_number">0549925526</span>
-                    </div>
-                    <div class="grid-item-6">
-                        <label>Country<strong>:</strong></label>
-                        <span class="Country">Saudi Arabia</span>
-                    </div>
-                    <div class="grid-item-7">
-                        <label>Address<strong>:</strong></label>
-                        <span class="Address">Alkhobar, 17A Street</span>
-                    </div>
-                    <div class="grid-item-8">
-                        <label>Zip<strong>:</strong></label>
-                        <span class="Zip">345467</span>
-                    </div>
-                    <div class="grid-item-9">
-                        <label>Password<strong>:</strong></label>
-                        <span class="Password">ABC123456</span>
-                    </div>
-                </div> 
-                <button class="Edit_Info_btn" id="Edit_Info_btn">Edit</button>
-                
+                    <button class="Edit_Info_btn" id="Edit_Info_btn">Edit</button>
+
                 </form>
                 <div class="edit_info_model">
                     <div class="edit_info_model_content">
-                          <form action="">
+                        <form action="">
                             <div class="edit_info_container">
                                 <div class="Edit_FN_grid_item_1">
                                     <label for="text" class="Edit_FN">First Name</label>
@@ -108,11 +114,11 @@
                                 </div>
                                 <div class="Edit_LN_grid_item_2">
                                     <label for="text" class="Edit LN">Last Name</label>
-                                    <input type="text" placeholder="Enter Your Last Name">    
+                                    <input type="text" placeholder="Enter Your Last Name">
                                 </div>
                                 <div class="Edit_BD_grid_item3">
                                     <label for="date">Date of Birth <strong>:</strong><label>
-                                    <input type="date" placeholder=" Enter Birth Date" > 
+                                            <input type="date" placeholder=" Enter Birth Date">
                                 </div>
                                 <div class="edit_email_grid_item_4">
                                     <label for="email">Email</label>
@@ -156,7 +162,8 @@
                                         <option value="Botswana">Botswana</option>
                                         <option value="Bouvet Island">Bouvet Island</option>
                                         <option value="Brazil">Brazil</option>
-                                        <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                                        <option value="British Indian Ocean Territory">British Indian Ocean Territory
+                                        </option>
                                         <option value="Brunei Darussalam">Brunei Darussalam</option>
                                         <option value="Bulgaria">Bulgaria</option>
                                         <option value="Burkina Faso">Burkina Faso</option>
@@ -175,7 +182,8 @@
                                         <option value="Colombia">Colombia</option>
                                         <option value="Comoros">Comoros</option>
                                         <option value="Congo">Congo</option>
-                                        <option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic of The</option>
+                                        <option value="Congo, The Democratic Republic of The">Congo, The Democratic
+                                            Republic of The</option>
                                         <option value="Cook Islands">Cook Islands</option>
                                         <option value="Costa Rica">Costa Rica</option>
                                         <option value="Cote D'ivoire">Cote D'ivoire</option>
@@ -219,8 +227,10 @@
                                         <option value="Guinea-bissau">Guinea-bissau</option>
                                         <option value="Guyana">Guyana</option>
                                         <option value="Haiti">Haiti</option>
-                                        <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
-                                        <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                                        <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald
+                                            Islands</option>
+                                        <option value="Holy See (Vatican City State)">Holy See (Vatican City State)
+                                        </option>
                                         <option value="Honduras">Honduras</option>
                                         <option value="Hong Kong">Hong Kong</option>
                                         <option value="Hungary">Hungary</option>
@@ -239,11 +249,13 @@
                                         <option value="Kazakhstan">Kazakhstan</option>
                                         <option value="Kenya">Kenya</option>
                                         <option value="Kiribati">Kiribati</option>
-                                        <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                                        <option value="Korea, Democratic People's Republic of">Korea, Democratic
+                                            People's Republic of</option>
                                         <option value="Korea, Republic of">Korea, Republic of</option>
                                         <option value="Kuwait">Kuwait</option>
                                         <option value="Kyrgyzstan">Kyrgyzstan</option>
-                                        <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                                        <option value="Lao People's Democratic Republic">Lao People's Democratic
+                                            Republic</option>
                                         <option value="Latvia">Latvia</option>
                                         <option value="Lebanon">Lebanon</option>
                                         <option value="Lesotho">Lesotho</option>
@@ -253,7 +265,8 @@
                                         <option value="Lithuania">Lithuania</option>
                                         <option value="Luxembourg">Luxembourg</option>
                                         <option value="Macao">Macao</option>
-                                        <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former Yugoslav Republic of
+                                        <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former
+                                            Yugoslav Republic of
                                         </option>
                                         <option value="Madagascar">Madagascar</option>
                                         <option value="Malawi">Malawi</option>
@@ -267,7 +280,8 @@
                                         <option value="Mauritius">Mauritius</option>
                                         <option value="Mayotte">Mayotte</option>
                                         <option value="Mexico">Mexico</option>
-                                        <option value="Micronesia, Federated States of">Micronesia, Federated States of</option>
+                                        <option value="Micronesia, Federated States of">Micronesia, Federated States of
+                                        </option>
                                         <option value="Moldova, Republic of">Moldova, Republic of</option>
                                         <option value="Monaco">Monaco</option>
                                         <option value="Mongolia">Mongolia</option>
@@ -312,7 +326,8 @@
                                         <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
                                         <option value="Saint Lucia">Saint Lucia</option>
                                         <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
-                                        <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines</option>
+                                        <option value="Saint Vincent and The Grenadines">Saint Vincent and The
+                                            Grenadines</option>
                                         <option value="Samoa">Samoa</option>
                                         <option value="San Marino">San Marino</option>
                                         <option value="Sao Tome and Principe">Sao Tome and Principe</option>
@@ -327,7 +342,8 @@
                                         <option value="Solomon Islands">Solomon Islands</option>
                                         <option value="Somalia">Somalia</option>
                                         <option value="South Africa">South Africa</option>
-                                        <option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich
+                                        <option value="South Georgia and The South Sandwich Islands">South Georgia and
+                                            The South Sandwich
                                             Islands</option>
                                         <option value="Spain">Spain</option>
                                         <option value="Sri Lanka">Sri Lanka</option>
@@ -340,7 +356,8 @@
                                         <option value="Syrian Arab Republic">Syrian Arab Republic</option>
                                         <option value="Taiwan">Taiwan</option>
                                         <option value="Tajikistan">Tajikistan</option>
-                                        <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                                        <option value="Tanzania, United Republic of">Tanzania, United Republic of
+                                        </option>
                                         <option value="Thailand">Thailand</option>
                                         <option value="Timor-leste">Timor-leste</option>
                                         <option value="Togo">Togo</option>
@@ -357,7 +374,8 @@
                                         <option value="United Arab Emirates">United Arab Emirates</option>
                                         <option value="United Kingdom">United Kingdom</option>
                                         <option value="United States">United States</option>
-                                        <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                                        <option value="United States Minor Outlying Islands">United States Minor
+                                            Outlying Islands</option>
                                         <option value="Uruguay">Uruguay</option>
                                         <option value="Uzbekistan">Uzbekistan</option>
                                         <option value="Vanuatu">Vanuatu</option>
@@ -371,26 +389,26 @@
                                         <option value="Zambia">Zambia</option>
                                         <option value="Zimbabwe">Zimbabwe</option>
                                     </select>
-                            
+
                                 </div>
 
                                 <div class="Edit_address_grid_item_7">
                                     <label for="text">Address</label>
                                     <input type="text" placeholder=" Enter Your Address">
                                 </div>
-                               <div class="Edit_Zip_grid_item_8">
-                                <label for="Zip">Zip</label>
-                                <input type="Zip" placeholder=" Enter Your Zip code">
-                               </div>
-                               <div class="Edit_password_grid_item_9">
-                                <label for="password">Password</label>
-                                <input type="password" placeholder=" Enter Your password">
-                               </div>
+                                <div class="Edit_Zip_grid_item_8">
+                                    <label for="Zip">Zip</label>
+                                    <input type="Zip" placeholder=" Enter Your Zip code">
+                                </div>
+                                <div class="Edit_password_grid_item_9">
+                                    <label for="password">Password</label>
+                                    <input type="password" placeholder=" Enter Your password">
+                                </div>
                             </div>
                             <button class="Update_info_btn" id="Update_info_btn">Update</button>
                             <button class="Cancel_Update_info_btn" id="Cancel_Update_info_btn">Cancel</button>
-                          </form>
-                          <div class="close_Update_form" id="close_Update_form">+</div>
+                        </form>
+                        <div class="close_Update_form" id="close_Update_form">+</div>
                     </div>
 
                 </div>
@@ -398,7 +416,8 @@
         </div>
 
     </div>
- 
+
 </body>
 <script src="/Views/personal_info.js"></script>
+
 </html>

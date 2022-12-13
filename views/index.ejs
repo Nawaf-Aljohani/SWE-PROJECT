@@ -39,12 +39,12 @@
 			<div class="Bookingcontainer">
 				<div class="Bookingitem">
 					<i class="material-icons" style="font-size: 20px;">calendar_today</i> <label>Check in</label> <br>
-					<input class="bookinginput" name="dateIn" id="dateIn" type="date">
+					<input class="bookinginput" name="dateIn" id="dateIn" type="date" required>
 				</div>
 
 				<div class="Bookingitem">
 					<i class="material-icons" style="font-size: 20px;">date_range</i> <label>Check out</label> <br>
-					<input class="bookinginput"  name="dateOut" id="dateOut"type="date" max="">
+					<input class="bookinginput"  name="dateOut" id="dateOut"type="date" max="" required>
 				</div>
 
 				<!-- 
@@ -56,7 +56,7 @@
 
 				<div class="Bookingitem">
 					<i class="material-icons" style="font-size: 20px;">person</i> <Label>Guests</Label> <br>
-					<input class="bookinginput" name="guestNumber" type="number" min="1" max="6" placeholder="Up to 6">
+					<input class="bookinginput" name="guestNumber" type="number" min="1" max="6" placeholder="Up to 6" required>
 				</div>
 
 				<div id="btndiv">

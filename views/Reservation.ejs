@@ -26,40 +26,43 @@
 
     <div id="Reservation_Div">
         <img class="Reservation_img" src="indexPics/img1.png" alt="img1">
-        <h2>placeholder text</h2>
-        <a href="/Payment">
-            <H3 onclick="saveprice('800')">Book Room for 800SR</H3>  
+        <h2>Small Room</h2>
+        <a href="/payment">
+            <H3 onclick="saveprice('small','800')">Book Room for 800SR</H3>  
         </a>
         
-        <img class="Reservation_img" src="indexPics/img2.png" alt="img2">
-        <h2>placeholder text</h2>
-        <a href="/Payment">
-            <H3 onclick="saveprice('1500')">Book Room for 1500SR</H3>  
-        </a>
+
 
         <img class="Reservation_img" src="indexPics/img3.png" alt="img3">
-        <h2>placeholder text</h2>
+        <h2>Medium Room</h2>
+        <a href="/payment">
+            <H3 onclick="saveprice('medium','1000')">Book Room for 1000SR</H3>  
+        </a>
+
+        <img class="Reservation_img" src="indexPics/img2.png" alt="img2">
+        <h2>Large Room</h2>
+        <a href="/payment">
+            <H3 onclick="saveprice('large','1500')">Book Room for 1500SR</H3>  
+        </a>
+        <img class="Reservation_img" src="indexPics/img5.png" alt="img5">
+        <h2>Luxurious small</h2>
         <a href="/Payment">
-            <H3 onclick="saveprice('1000')">Book Room for 1000SR</H3>  
+            <H3 onclick="saveprice('Luxurious_small','1200')">Book Room for 1200SR</H3>  
         </a>
 
         <img class="Reservation_img" src="indexPics/img4.png" alt="img4">
-        <h2>placeholder text</h2>
+        <h2>Luxurious Medium</h2>
         <a href="/Payment">
-            <H3 onclick="saveprice('2000')">Book Room for 2000SR</H3>  
+            <H3 onclick="saveprice('Luxurious_medium','2000')">Book Room for 2000SR</H3>  
         </a>
 
         <img class="Reservation_img" src="indexPics/img5.png" alt="img5">
-        <h2>placeholder text</h2>
+        <h2>Luxurious large</h2>
         <a href="/Payment">
-            <H3 onclick="saveprice('3000')">Book Room for 3000SR</H3>  
+            <H3 onclick="saveprice('Luxurious_large','3000')">Book Room for 3000SR</H3>  
         </a>
 
-        <img class="Reservation_img" src="indexPics/img5.png" alt="img5">
-        <h2>placeholder text</h2>
-        <a href="/Payment">
-            <H3 onclick="saveprice('1200')">Book Room for 1200SR</H3>  
-        </a>
+
     </div>  
     <hr>
 	<footer id="Signupfooter">
@@ -81,8 +84,11 @@
 
 	</footer>
     <script>
-       function saveprice(val) 
-       {localStorage.setItem("price", val);}
+       function saveprice(val1, val2) 
+       {
+        localStorage.setItem("type", val1);
+        localStorage.setItem("price", val2);
+        }
     </script>
 
 </body>
