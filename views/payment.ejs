@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        payment
+    </title>
+    <link rel="stylesheet" href="HotelCSS_RES_PAY.css">
+    <script src="/Views/RES_Pay_scripts.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap" rel="stylesheet">
+
+</head>
+
+
+<header>
+    <ul id="navigation">
+        <li><a id="logo" href="/">Overlook</a></li>
+        <li><a id="back" href="/Reservation">Back to Reservations</a></li>
+    </ul>
+</header>
+
+
+
+
+<body class="Reservation_payment_background">
+
+    <h1 class="Reservation_payment_Heading">
+        Enter payment details
+    </h1>
+
+
+    <table class="center">
+        <tr>
+            <td>
+                <h2>Price per room: </h2>
+            </td>
+            <td>
+                <h2 id="result_price"></h2>
+            </td>
+            <td>
+                <h2>SR</h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Check-in date: </h2>
+            </td>
+            <td>
+                <h2 id="result_in"></h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Check-out date: </h2>
+            </td>
+            <td>
+                <h2 id="result_out"></h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Total days staying: </h2>
+            </td>
+            <td>
+                <h2 id="result_days"></h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h2>Total price: </h2>
+            </td>
+            <td>
+                <h2 id="result_Total"></h2>
+            </td>
+            <td>
+                <h2>SR</h2>
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        var date_in = new Date(localStorage.getItem("check_in"));
+        var date_out = new Date(localStorage.getItem("check_out"));
+        document.getElementById("result_price").innerHTML = localStorage.getItem("price");
+        document.getElementById("result_in").innerHTML = localStorage.getItem("check_in_string");
+        document.getElementById("result_out").innerHTML = localStorage.getItem("check_out_string");
+        document.getElementById("result_days").innerHTML = dateDiffInDays(date_in, date_out);
+        document.getElementById("result_Total").innerHTML =   localStorage.getItem("price") * dateDiffInDays(date_in, date_out);
+
+        function dateDiffInDays(a, b) {
+            const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+            // Discard the time and time-zone information.
+            const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+            const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+            return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+        }
+
+
+    </script>
+
+
+    <div class="forms">
+        <form action="/payment" method="post">
+            <fieldset>
+                <p><label><b>Card number:</b></label>
+                <p>
+                    <input class="alt_form" type="text" name="Card_numberx" size="30" placeholder="4212421343144215" />
+                <p><label><b>CC:</b></label>
+                <p>
+                    <input class="alt_form" type="text" id="Card_number" name="Card_number" disabled />
+
+                <p><label><b>Month: &emsp;&emsp;&emsp;&emsp;&emsp;Year:</b></label>
+                <p>
+                    <script>document.getElementById("Card_number").value = localStorage.getItem("price");</script>
+                    <select class="alt_form" name="Month" id="Month">
+                        <option value="1-January">1-January</option>
+                        <option value="2-February">2-February</option>
+                        <option value="3-March">3-March</option>
+                        <option value="4-April">4-April</option>
+                        <option value="5-May">5-May</option>
+                        <option value="6-June">6-June</option>
+                        <option value="7-July">7-July</option>
+                        <option value="8-August">8-August</option>
+                        <option value="9-September">9-September</option>
+                        <option value="10-october">10-october</option>
+                        <option value="11-November">11-November</option>
+                        <option value="12-December">12-December</option>
+                    </select>
+
+                    <select class="alt_form" name="Year" id="Year">
+                        <option value="2022">2022</option>
+                        <option value="2023">2023</option>
+                        <option value="2024">2024</option>
+                        <option value="2025">2025</option>
+                        <option value="2026">2026</option>
+                        <option value="2027">2027</option>
+                        <option value="2028">2028</option>
+                        <option value="2029">2029</option>
+                        <option value="2030">2030</option>
+                        <option value="2031">2031</option>
+                        <option value="2032">2032</option>
+                        <option value="2033">2033</option>
+                    </select>
+                <p><label><b>First name:</b></label></p>
+
+                <input class="alt_form" type="text" name="First_name" size="30" />
+                <p><label><b>Last name:</b></label></p>
+
+                <input class="alt_form" type="text" name="Last_name" size="30" />
+                <p><label><b>Email:</b></label>
+                <p>
+                    <input class="alt_form" type="text" name="Email" size="30" placeholder="myEmail@gmail.com" />
+                <p><label><b>Phone:</b></label>
+                <p>
+                    <input class="alt_form" type="text" name="Phone" size="30" placeholder="996555555555" />
+                <p><label><b>Country/Region:</b></label>
+                <p>
+                    <input class="alt_form" type="text" name="Country" size="30" />
+                <p><label><b>Address:</b></label>
+                <p>
+                    <input class="alt_form" type="text" name="Address" size="30" />
+
+                <p><label><b>Zip code:</b></label>
+                <p>
+                    <input class="alt_form" type="text" name="Zip" size="30" />
+                <p><label><b>City:</b></label>
+                <p>
+                    <input class="alt_form" type="text" name="City" size="30" />
+                    <input type="submit" >
+            </fieldset>
+        </form>
+    </div>
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Home</title>
+	<link href="style.css" rel="stylesheet" type="text/css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+
+	<header>
+		<ul id="navigation">
+			<li><a id="logo" href="/">Overlook</a></li>
+
+
+			<% if(isUserLoggedIn){ %>
+				<form action="/logout?_method=DELETE" method="POST">
+					<li> <a id="logout" href="/profile">Profile</a></li>
+					<li> <button id="loginBtn" type="submit">Log out</button></li>
+
+				</form>
+				<% } else{ %>
+					<li> <a id="login" href="/logIn">Log in</a></li>
+					<li> <a id="signup" href="/SignUp">Sign up</a></li>
+					<% } %>
+
+		</ul>
+	</header>
+	<main>
+		<form id="bookingsform" action="/index" method="post">
+			<div class="Bookingcontainer">
+				<div class="Bookingitem">
+					<i class="material-icons" style="font-size: 20px;">calendar_today</i> <label>Check in</label> <br>
+					<input class="bookinginput" name="dateIn" id="dateIn" type="date">
+				</div>
+
+				<div class="Bookingitem">
+					<i class="material-icons" style="font-size: 20px;">date_range</i> <label>Check out</label> <br>
+					<input class="bookinginput"  name="dateOut" id="dateOut"type="date" max="">
+				</div>
+
+				<!-- 
+				<div class="Bookingitem">
+					<i class="material-icons" style="font-size: 20px;">bed</i> <label>Rooms</label> <br>
+					<input class="bookinginput" type="number" min="1" max="3" placeholder="Up to 3">
+				</div>
+				-->
+
+				<div class="Bookingitem">
+					<i class="material-icons" style="font-size: 20px;">person</i> <Label>Guests</Label> <br>
+					<input class="bookinginput" name="guestNumber" type="number" min="1" max="6" placeholder="Up to 6">
+				</div>
+
+				<div id="btndiv">
+					<input id="findroombtn" type="submit" onclick="saverooms()" value="Find rooms">
+
+				</div>
+			</div>
+			<p id="bookingNote">For group booking, please contact customer support.</p>
+
+			<script>
+
+				function saverooms()
+				{
+				localStorage.setItem("check_in", document.getElementById('dateIn').valueAsDate);
+				localStorage.setItem("check_out", document.getElementById('dateOut').valueAsDate);
+				localStorage.setItem("check_in_string", document.getElementById('dateIn').value);
+				localStorage.setItem("check_out_string", document.getElementById('dateOut').value);
+	
+				console.log("test");
+	
+				}
+	
+			 </script>
+
+		</form>
+
+	</main>
+	<hr>
+	<section>
+		<div id="mainHotel">
+			<figure>
+
+				<img src="IndexPics\lossy-page1-1920px-The_Stanley_Hotel_in_Estes_Park,_a_town_on_the_eastern_edge_of_Rocky_Mountain_National_Park_in_north-central_Colorado_LCCN2015633407.tif.jpg"
+					alt="Overlook hotel">
+				<figcaption id="hotelcaption"> Overlook Hotel</figcaption>
+
+			</figure>
+
+		</div>
+		<div class="row">
+
+			<div class="column">
+				<img src="IndexPics\pexels-m&w-studios-90317.jpg" alt="Snow" style="width:100%">
+				<p>Luxurious</p>
+				<i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i
+					class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i>
+			</div>
+
+			<div class="column">
+				<img src="IndexPics\pexels-pixabay-164595.jpg" alt="Forest" style="width:100%">
+				<p>Classy</p>
+				<i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i
+					class="fa fa-tv"></i> <i class="fa fa-cutlery"></i>
+			</div>
+
+			<div class="column">
+				<img src="IndexPics\pexels-pixabay-271618.jpg" alt="Mountains" style="width:100%">
+				<p>Affordable</p>
+				<i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></i> <i
+					class="fa fa-cutlery"></i>
+			</div>
+
+		</div>
+
+	</section>
+
+
+
+	<hr>
+	<footer id="Signupfooter">
+		<div class="Signupdivfooter">
+			<h2>Questions? </h2>
+			<h4>+1800-5700000</h4>
+			<p>Our number is toll-free!</p>
+		</div>
+
+		<div class="Signupdivfooter">
+			<ul id="footerul">
+				<li class="footerli"> <a href="/About">About</a> <br></li>
+				<li class="footerli"> <a href="/Careers">Careers</a> <br></li>
+				<li class="footerli"> <a href="/CustomerSupport">Customer Support</a></li>
+			</ul>
+
+
+		</div>
+
+	</footer>
+
+</body>
+
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Reservation page
+    </title>
+    <link rel="stylesheet" href="HotelCSS_RES_PAY.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap" rel="stylesheet">
+
+</head>
+
+<header>
+    <ul id="navigation">
+        <li><a id="logo" href="/">Overlook</a></li>
+    </ul>
+</header>
+
+<body class="Reservation_payment_background">
+    <h1 class="Reservation_payment_Heading">
+        Choose from our available rooms
+    </h1>
+
+    <div id="Reservation_Div">
+        <img class="Reservation_img" src="indexPics/img1.png" alt="img1">
+        <h2>placeholder text</h2>
+        <a href="/Payment">
+            <H3 onclick="saveprice('800')">Book Room for 800SR</H3>  
+        </a>
+        
+        <img class="Reservation_img" src="indexPics/img2.png" alt="img2">
+        <h2>placeholder text</h2>
+        <a href="/Payment">
+            <H3 onclick="saveprice('1500')">Book Room for 1500SR</H3>  
+        </a>
+
+        <img class="Reservation_img" src="indexPics/img3.png" alt="img3">
+        <h2>placeholder text</h2>
+        <a href="/Payment">
+            <H3 onclick="saveprice('1000')">Book Room for 1000SR</H3>  
+        </a>
+
+        <img class="Reservation_img" src="indexPics/img4.png" alt="img4">
+        <h2>placeholder text</h2>
+        <a href="/Payment">
+            <H3 onclick="saveprice('2000')">Book Room for 2000SR</H3>  
+        </a>
+
+        <img class="Reservation_img" src="indexPics/img5.png" alt="img5">
+        <h2>placeholder text</h2>
+        <a href="/Payment">
+            <H3 onclick="saveprice('3000')">Book Room for 3000SR</H3>  
+        </a>
+
+        <img class="Reservation_img" src="indexPics/img5.png" alt="img5">
+        <h2>placeholder text</h2>
+        <a href="/Payment">
+            <H3 onclick="saveprice('1200')">Book Room for 1200SR</H3>  
+        </a>
+    </div>  
+    <hr>
+	<footer id="Signupfooter">
+		<div class="Signupdivfooter">
+			<h2>Questions? </h2>
+			<h4>+1800-5700000</h4>
+			<p>Our number is toll-free!</p>
+		</div>
+
+		<div class="Signupdivfooter">
+			<ul id="footerul">
+				<li class="footerli"> <a href="/About">About</a> <br></li>
+				<li class="footerli"> <a href="/Careers">Careers</a> <br></li>
+				<li class="footerli"> <a href="/CustomerSupport">Customer Support</a></li>
+			</ul>
+
+
+		</div>
+
+	</footer>
+    <script>
+       function saveprice(val) 
+       {localStorage.setItem("price", val);}
+    </script>
+
+</body>

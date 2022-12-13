@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="Login.css" rel="stylesheet" type="text/css" />
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap" rel="stylesheet">
+
+	<title>Log in</title>
+</head>
+
+<body>
+	<header>
+		<ul id="navigation">
+			<li><a id="logo" href="/">Overlook</a></li>
+		</ul>
+	</header>
+
+	<form action="/logIn" method="POST">
+		<div id="signinDiv">
+			<h1>Log in</h1>
+			<p>All fields are required.</p>
+			<% if (messages.error) { %>
+				<%= messages.error %>
+			  <% } %>
+			<label>Email</label>
+			<br>
+			<input class="signininput" type="email" id="email" name="email" required>
+			<br>
+			<label>Password</label>
+			<br>
+			<input class="signininput" type='password' id="password" name="password" minlength="8" required>
+			<br>
+			<input type="submit" value="Log in">
+
+			<p>Don't have an account?</p>
+			<p><a href="/SignUp">Sign up!</a></p>
+		</div>
+
+	</form>
+	<hr>
+
+	<footer id="Signupfooter">
+		<div class="Signupdivfooter">
+			<h2>Questions? </h2>
+			<h4>+1800-5700000</h4>
+			<p>Our number is toll-free!</p>
+		</div>
+
+		<div class="Signupdivfooter">
+			<ul id="footerul">
+				<li class="footerli"> <a href="/About">About</a> <br></li>
+				<li class="footerli"> <a href="/Careers">Careers</a> <br></li>
+				<li class="footerli"> <a href="/CustomerSupport">Customer Support</a></li>
+			</ul>
+
+
+		</div>
+	</footer>
+
+</body>
+
+</html>

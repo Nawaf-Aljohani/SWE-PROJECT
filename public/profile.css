@@ -1,0 +1,304 @@
+
+*{
+
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+
+
+}
+
+
+body{
+
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+
+}
+
+.sidebar{
+
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 240px;
+    background: #4683d5;
+    padding: 6px 14px;
+}
+
+.sidebar .logo_content .logo {
+
+
+color:#fff ;
+display: flex;
+height: 50px;
+width: 100%;
+align-items: center;
+}
+
+.logo_content .logo i{
+
+    font-size:28px;
+    margin-right: 5px;
+
+}
+
+.logo_content .logo logo_name{
+
+    font-size: 20px;
+    font-weight: 400;
+}
+
+
+.sidebar #btn{
+
+    position: absolute;
+    color: #fff;
+    left: 90%;
+    top: 6px;
+    font-size: 20px;
+    height: 50px;
+    width: 50px;
+    text-align: center;
+    line-height: 50px;
+    transform: translateX(-50%);
+
+}
+
+.sidebar ul{
+
+    margin-top: 20px;
+
+}
+
+.sidebar ul li {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    margin: 0 5px;
+    list-style: none;
+    line-height: 50px;
+    border-radius: 12px;
+}
+
+
+.sidebar ul li a {
+
+
+    color: #fff;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-radius: 12px;
+
+}
+
+.sidebar ul li a:hover{
+
+    color: #021e90;
+    background: #fff;
+}
+
+
+
+.sidebar ul li a i {
+
+
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    line-height: 50px;
+    text-align: center;
+}
+
+.profile_content{
+
+    position: absolute;
+    height: 100%;
+    width: calc(100% - 240px);
+    left: 250px;
+}
+
+
+
+
+form .grid-container{
+
+    display: grid;
+    grid-template-columns: 1;
+    padding: 10px;
+    gap: 10px;
+
+}
+
+
+.Edit_Info_btn {
+
+   padding: 10px 40px;
+   border-radius: 20px; 
+   border:1px solid gray;
+   font-size: 1rem;
+   font:bold;
+   cursor: pointer;
+   background-color: #021e90;
+   color: #fff;
+   
+}
+
+.Edit_Info_btn:hover {
+
+    background-color: #fff;
+    color: #021e90;
+    transition: 0.3s;
+
+}
+
+
+
+.edit_info_model{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0,0.7);
+    opacity: 0.7;
+    position: absolute;
+    top: 0;
+    display: none;
+}
+
+.edit_info_model_content{
+
+    width: 650px;
+    height: 700px;
+    background-color: #fff;
+    border-radius:6px ;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+.close_Update_form{
+
+    position: absolute;
+    top: 0;
+    right: 14px;
+    font-size: 40px;
+    transform: rotate(45deg);
+    cursor: pointer;
+}
+
+
+
+.edit_info_container{
+
+    display: grid;
+    grid-template-columns: 1;
+    gap: 10px;
+
+
+}
+
+.edit_info_container input {
+
+    width: 300px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+
+.edit_info_container option {
+
+    width: 300px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid gray;
+}
+
+.Edit_Country{
+ width: 300px;
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid gray;
+
+}
+
+
+.edit_info_container  label{
+
+    display: block;
+    left: 20px;
+} 
+
+.Update_info_btn{
+
+    padding: 10px 20px;
+    margin: 25px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    font-size: 15px;
+    background-color: #021e90;
+    color: #fff;
+    cursor: pointer;
+}
+
+.Update_info_btn:hover{
+
+    background-color: #fff;
+    color: #021e90;
+    transition: 0.3s;
+}
+
+.Cancel_Update_info_btn{
+    padding: 10px 20px;
+    margin: 25px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    font-size: 15px;
+    background-color: rgb(186, 9, 9);
+    color: #fff;
+    cursor: pointer;
+}
+
+.Cancel_Update_info_btn:hover{
+
+    background-color:#fff;
+    color: rgb(186, 9, 9);
+
+}
+
+
+.grid-container-bookings {
+
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 30px;
+    margin: 20px;
+    top: 10px;
+    width: 1200px;
+    height: 400px;
+    gap:4rem;
+    color: 021e90;
+}
+
+.grid-booking{
+    color: 021e90;
+    border: 1px solid gray;
+    padding: 20px;
+    text-align: center;
+}
+
+
+.profile_content  h1{
+
+    color: 021e90;
+    font-size:25px;
+    font-weight: 500;
+    margin: 12px;
+}
