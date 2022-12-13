@@ -154,7 +154,7 @@ app.post("/SignUp", async function (request, response) {
             return;
         }
 
-
+        //test
         const hashedPassword = await bcrypt.hash(request.body.password, 10)
         const newUser = new User({
             UserID: Date.now().toString(),
