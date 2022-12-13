@@ -44,7 +44,6 @@ app.use(session({
 }))
 app.use(passport.initialize())
 app.use(passport.session())
-//app.use(express.json);
 app.use(methodOverride('_method'))
 
 const LocalStrategy = require('passport-local').Strategy
@@ -84,7 +83,6 @@ passport.deserializeUser(function (id, done) {
 app.get("/", function (request, response) {
     connect();
     response.render("index.ejs", { isUserLoggedIn: request.isAuthenticated() });
-    console.log(request.user)
 });
 
 
@@ -103,7 +101,7 @@ app.get("/About", function (request, response) {
     response.render("About.ejs")
 });
 
-app.get("/Careers", isAdmin,function (request, response) {
+app.get("/Careers", function (request, response) {
     response.render("Careers.ejs")
 });
 
@@ -117,12 +115,20 @@ app.get('/profile', checkNotAuthenticated, function (request, response) {
 app.get("/personal_Info", checkNotAuthenticated, function (request, response) {
     User.findById(request.user.id, function (err, data) {
         if (err) console.log(err)
-        if (data)
-            console.log(data)
-        response.render("personal_Info.ejs", { x: data.email })
 
+        if (data) {
+            return response.render("personal_Info.ejs",
+                {
+                    userEmail: data.email,
+                    userPhone: data.Phone_Number,
+                    userFname: data.FName,
+                    userLname: data.LName,
+                    userCountry: data.Country,
+                    userAddress: data.Address,
+                    userPostal: data.Postal_Code
+                })
+        }
     })
-
 
 
 });
@@ -160,7 +166,15 @@ app.post("/SignUp", async function (request, response) {
         const newUser = new User({
             UserID: Date.now().toString(),
             email: request.body.email,
-            password: hashedPassword
+            password: hashedPassword,
+            Phone_Number: request.body.Phone_Number,
+            FName: request.body.FName,
+            LName: request.body.LName,
+            Country: request.body.Country,
+            Address: request.body.Address,
+            Postal_Code: request.body.Postal_Code
+
+
         })
 
         newUser.save();
@@ -190,6 +204,16 @@ app.post("/payment", checkNotAuthenticated, function (request, response) {
 });
 
 
+/*
+(request, response) => {
+
+    if (request.body.email === "a@gmail.com") {
+        response.redirect("/About");
+    }
+
+}
+
+*/
 
 app.delete('/logout', (request, response) => {
     request.logOut(function (error) {
@@ -231,17 +255,4 @@ function isAdmin(request, response, next) {
     } else {
         return response.redirect("/");
     }
-}
-
-
-
-
-
-function dateDiffInDays(a, b) {
-    const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-    // Discard the time and time-zone information.
-    const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-    const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
-    return Math.floor((utc2 - utc1) / _MS_PER_DAY);
 }
