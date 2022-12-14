@@ -51,7 +51,7 @@ app.use(methodOverride('_method'))
 
 const LocalStrategy = require('passport-local').Strategy
 passport.use(new LocalStrategy({
-    usernameField: 'email',    // define the parameter in req.body that passport can use as username and password
+    usernameField: 'email',   
     passwordField: 'password'
 }, function (email, password, done) {
     User.findOne({ email: email }, function (err, user) {
@@ -80,36 +80,24 @@ app.get("/", noAdmin, function (request, response) {
     connect();
     response.render("index.ejs", { isUserLoggedIn: request.isAuthenticated() });
 });
-
 app.get("/Admin", isAdmin, function (request, response) {
     response.render("Admin.ejs")
 });
-
-
-
 app.get("/logIn", checkAuthenticated, function (request, response) {
     response.render("logIn.ejs")
 });
-
-
-
 app.get("/SignUp", noAdmin, checkAuthenticated, function (request, response) {
     response.render("SignUp.ejs");
 });
-
-
 app.get("/About", noAdmin, function (request, response) {
     response.render("About.ejs")
 });
-
 app.get("/Careers", noAdmin, function (request, response) {
     response.render("Careers.ejs")
 });
-
 app.get("/CustomerSupport", noAdmin, function (request, response) {
     response.render("CustomerSupport.ejs")
 });
-
 app.get('/profile', noAdmin, checkNotAuthenticated, function (request, response) {
     response.render('profile.ejs');
 });
@@ -134,7 +122,6 @@ app.get("/personal_Info", noAdmin, checkNotAuthenticated, function (request, res
 
 });
 app.get("/Reservation", noAdmin, checkNotAuthenticated, function (request, response) {
-
     response.render("Reservation.ejs")
 });
 app.get("/payment", noAdmin, checkNotAuthenticated, function (request, response) { // we need to check if the customer has chosen a room before going to this page
@@ -157,8 +144,6 @@ app.get("/view_bookings", isAdmin, async function (request, response) {
     const all = await booking.find({}); //this array contains all bookings
     response.render("view_bookings.ejs", { all })
 })
-
-
 app.get("/BookForUser", isAdmin, async function (request, response) {
     const Users_ID = await User.find({ Admin: false })
     response.render("BookForUser.ejs", { Users: Users_ID })
@@ -167,13 +152,9 @@ app.get("/CancelBookingOfUser", isAdmin, async function (request, response) {
     const Bookings = await booking.find({})
     response.render("CancelBookingOfUser.ejs", { Rooms: Bookings })
 })
-
-
 app.get("/Add_Room", isAdmin, function (request, response) {
     response.render("Add_Room.ejs");
 });
-
-
 app.post("/Index", checkNotAuthenticated, function (request, response) {
     response.redirect("/Reservation")
 });
@@ -181,7 +162,6 @@ app.get("/delete_Room", isAdmin, function (request, response) {
     response.render("delete_Room.ejs");
 
 });
-
 app.post("/SignUp", async function (request, response) {
     try {
         connect();
@@ -202,8 +182,6 @@ app.post("/SignUp", async function (request, response) {
             Country: request.body.Country,
             Address: request.body.Address,
             Postal_Code: request.body.Postal_Code
-
-
         })
         newUser.save();
 
@@ -339,27 +317,6 @@ app.post('/Bookings', async (req, res) => {
     } catch {console.log('There are no Bookings to display');}
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 app.listen(port, hostname, function () {
     console.log("Server Started on http://127.0.0.1:8000");
