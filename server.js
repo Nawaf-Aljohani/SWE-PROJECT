@@ -80,13 +80,12 @@ passport.deserializeUser(function (id, done) {
 
 
 let alert = require('alert');
-
 app.get("/Add_Room", isAdmin, function (request, response) {
     connect();
     response.render("Add_Room.ejs");
 
-});
 
+});
 app.post("/Add_Room", async function (request, response) {
     const exists = await Rooms.exists({ roomNum: request.body.roomNumber })
     if (exists) {
@@ -121,6 +120,7 @@ app.post("/delete_Room", async function (request, response) {
     if (exists) {
         roomNumberx = await Rooms.find({ roomNum: request.body.roomNumber })
 
+
         if (!roomNumberx[0].Reserved) {
             await Rooms.deleteOne({ roomNum: request.body.roomNumber });
             alert("Room deleted")
@@ -137,6 +137,43 @@ app.post("/delete_Room", async function (request, response) {
 
 
 });
+
+
+
+// app.get("/book_room", isAdmin, function (request, response) {
+//     app.render("book_room.ejs")
+// })
+
+// app.post("/book_room", async function (request, response) {
+//     const exists = await Rooms.exists({ roomNum: request.body.roomNumber, Reserved: false })
+//     const UserExists = await Rooms.exists({ UserID: request.body.UserID })
+//     try {
+//         if (exists && UserExists) {
+//             roomNumberx = await Rooms.findOneAndUpdate({ roomNum: request.body.roomNumber, Reserved: true })
+//             const newBooking = new bookings({
+//                 UserID: request.body.UserID,
+//                 Room_Number: request.body.roomNumber,
+//                 Check_in: request.body.Check_in,
+//                 Check_out: request.body.Check_out,
+//             })
+//             newBooking.save();
+//             alert("Room Booked")
+//             return;
+//         } else {
+//             alert("Error booking a room")
+//         }
+//         response.redirect("/book_room");
+//     } catch {
+//         alert("Major Error");
+//     }
+// });
+
+app.get("/view_bookings", isAdmin, async function (request, response) {
+    const all = await booking.find({}); //this array contains all bookings
+    console.log(all)
+    console.log(all[0].Room_Number)
+    app.render("view_bookings.ejs")
+})
 
 
 
