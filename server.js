@@ -173,12 +173,12 @@ app.get("/view_bookings", isAdmin, async function (request, response) {
 })
 
 
-app.get("/",noAdmin, function (request, response) {
-    //connect();
+app.get("/", noAdmin, function (request, response) {
+    connect();
     response.render("index.ejs", { isUserLoggedIn: request.isAuthenticated() });
 });
 
-app.get("/Admin",isAdmin, function (request, response) {
+app.get("/Admin", isAdmin, function (request, response) {
     response.render("Admin.ejs")
 });
 
@@ -190,27 +190,27 @@ app.get("/logIn", checkAuthenticated, function (request, response) {
 
 
 
-app.get("/SignUp",noAdmin, checkAuthenticated, function (request, response) {
+app.get("/SignUp", noAdmin, checkAuthenticated, function (request, response) {
     response.render("SignUp.ejs");
 });
 
 
-app.get("/About",noAdmin, function (request, response) {
+app.get("/About", noAdmin, function (request, response) {
     response.render("About.ejs")
 });
 
-app.get("/Careers",noAdmin, function (request, response) {
+app.get("/Careers", noAdmin, function (request, response) {
     response.render("Careers.ejs")
 });
 
-app.get("/CustomerSupport",noAdmin, function (request, response) {
+app.get("/CustomerSupport", noAdmin, function (request, response) {
     response.render("CustomerSupport.ejs")
 });
 
-app.get('/profile', noAdmin,checkNotAuthenticated, function (request, response) {
+app.get('/profile', noAdmin, checkNotAuthenticated, function (request, response) {
     response.render('profile.ejs');
 });
-app.get("/personal_Info",noAdmin, checkNotAuthenticated, function (request, response) {
+app.get("/personal_Info", noAdmin, checkNotAuthenticated, function (request, response) {
     User.findById(request.user.id, function (err, data) {
         if (err) console.log(err)
 
@@ -230,24 +230,24 @@ app.get("/personal_Info",noAdmin, checkNotAuthenticated, function (request, resp
 
 
 });
-app.get("/Reservation",noAdmin, checkNotAuthenticated, function (request, response) {
+app.get("/Reservation", noAdmin, checkNotAuthenticated, function (request, response) {
 
     response.render("Reservation.ejs")
 });
-app.get("/payment",noAdmin, checkNotAuthenticated, function (request, response) { // we need to check if the customer has chosen a room before going to this page
+app.get("/payment", noAdmin, checkNotAuthenticated, function (request, response) { // we need to check if the customer has chosen a room before going to this page
     response.render("payment.ejs")
 });
-app.get('/Bookings',checkNotAuthenticated, function (request, response) {    
-    booking.find({ UserID: request.user.UserID},  function (err, docs) {
-        if (err){
+app.get('/Bookings', checkNotAuthenticated, function (request, response) {
+    booking.find({ UserID: request.user.UserID }, function (err, docs) {
+        if (err) {
             console.log(err);
         }
-        else{
+        else {
             console.log(docs[0].Check_in)
-            
-            response.render('Bookings.ejs',{data: docs});
+
+            response.render('Bookings.ejs', { data: docs });
         }
-    });   
+    });
 });
 
 
@@ -315,7 +315,7 @@ app.post("/payment", checkNotAuthenticated, async function (request, response) {
 
         const saveBooking = await newBooking.save();
     } catch (error) {
-        console.log("Rooms full") // fix this later
+        alert("Rooms full")
     }
     response.redirect("/")
 
