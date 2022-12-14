@@ -39,20 +39,14 @@
 			<div class="Bookingcontainer">
 				<div class="Bookingitem">
 					<i class="material-icons" style="font-size: 20px;">calendar_today</i> <label>Check in</label> <br>
-					<input class="bookinginput" name="dateIn" id="dateIn" type="date" required>
+					<input class="bookinginput" name="dateIn" id="dateIn" type="date" onclick="res_date_in()" required>
 				</div>
 
 				<div class="Bookingitem">
 					<i class="material-icons" style="font-size: 20px;">date_range</i> <label>Check out</label> <br>
-					<input class="bookinginput"  name="dateOut" id="dateOut"type="date" max="" required>
+					<input class="bookinginput"  name="dateOut" id="dateOut"type="date" onclick="res_date_out()" max="" required>
 				</div>
 
-				<!-- 
-				<div class="Bookingitem">
-					<i class="material-icons" style="font-size: 20px;">bed</i> <label>Rooms</label> <br>
-					<input class="bookinginput" type="number" min="1" max="3" placeholder="Up to 3">
-				</div>
-				-->
 
 				<div class="Bookingitem">
 					<i class="material-icons" style="font-size: 20px;">person</i> <Label>Guests</Label> <br>
@@ -67,18 +61,21 @@
 			<p id="bookingNote">For group booking, please contact customer support.</p>
 
 			<script>
-
+				document.getElementById("dateIn").min = new Date().getFullYear() + "-" +  parseInt(new Date().getMonth() + 1 ) + "-" + new Date().getDate();
+	
+				function res_date_in()
+				{document.getElementById("dateOut").value = "";}
+	
+				function res_date_out()
+				{document.getElementById("dateOut").min = document.getElementById("dateIn").value;}
+	
 				function saverooms()
 				{
 				localStorage.setItem("check_in", document.getElementById('dateIn').valueAsDate);
 				localStorage.setItem("check_out", document.getElementById('dateOut').valueAsDate);
 				localStorage.setItem("check_in_string", document.getElementById('dateIn').value);
 				localStorage.setItem("check_out_string", document.getElementById('dateOut').value);
-	
-				console.log("test");
-	
 				}
-	
 			 </script>
 
 		</form>

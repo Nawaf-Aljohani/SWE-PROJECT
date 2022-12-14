@@ -57,6 +57,19 @@
     <div class="profile_content">
         <h1>Bookings</h1>
 
+        <% for (var i = 0; i < data.length; i++) { %>
+            <%= data[i].Room_Number %>
+            <hr>
+            <%= data[i].Check_in %>
+            <hr>
+            <%= data[i].Check_out %>
+            <hr>
+            
+
+
+
+
+            <% } %>
 
         <div class="grid-container-bookings">
 

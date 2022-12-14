@@ -1,0 +1,57 @@
+#allbookingsdiv {
+    text-align: center;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    width: 60%;
+}
+table, tr{
+	border: 1px solid rgb(235, 234, 234);
+}
+
+
+html,
+body {
+    font-family: 'Sora', sans-serif;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+}
+
+
+
+header {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	padding: 0;
+}
+
+
+#navigation {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: white;
+	border-bottom: 1px solid rgb(235, 234, 234);
+}
+
+#logo {
+	font-size: 1rem;
+	display: block;
+	float: left;
+	padding: 14px 16px;
+	text-align: center;
+	text-decoration: none;
+	color: #4683d5;
+	font-family: 'Sora', sans-serif;
+}
+
+#logo:hover {
+	background-color: rgb(233, 233, 233);
+	border-radius: 5px;
+	cursor: pointer;
+}

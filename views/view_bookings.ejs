@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="addRooms.css">
+    <link rel="stylesheet" href="view_bookings.css">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap" rel="stylesheet">
     <title>View Bookings</title>
 </head>
 
@@ -14,9 +15,27 @@
         <ul id="navigation">
             <li><a id="logo" href="/">Overlook</a></li>
     </header>
+<div id="allbookingsdiv">
+    <table>
+        <tr>
+            <th>UserID</th>
+            <th>Room_Number</th>
+            <th>Check_in</th>
+            <th>Check_out</th>
+
+        </tr>
 
 
-
+    <% for(var i=0; i < all.length; i++) {%>
+            <tr>
+                <td><%= all[i].UserID %></td>
+                <td><%= all[i].Room_Number %></td>
+                <td><%= all[i].Check_in %></td>
+                <td><%= all[i].Check_out %></td>
+              </tr>
+        <% } %>
+    </table>
+</div>
 </body>
 
 </html>

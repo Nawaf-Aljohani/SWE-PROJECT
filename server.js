@@ -81,7 +81,6 @@ passport.deserializeUser(function (id, done) {
 
 let alert = require('alert');
 app.get("/Add_Room", isAdmin, function (request, response) {
-    connect();
     response.render("Add_Room.ejs");
 
 
@@ -108,7 +107,6 @@ app.post("/Add_Room", async function (request, response) {
 
 
 app.get("/delete_Room", isAdmin, function (request, response) {
-    connect();
     response.render("delete_Room.ejs");
 
 });
@@ -170,20 +168,20 @@ app.post("/delete_Room", async function (request, response) {
 
 app.get("/view_bookings", isAdmin, async function (request, response) {
     const all = await booking.find({}); //this array contains all bookings
-    console.log(all)
-    console.log(all[0].Room_Number)
-    app.render("view_bookings.ejs")
+
+    response.render("view_bookings.ejs", { all })
 })
 
 
-
-
-
-
-app.get("/", function (request, response) {
-    connect();
+app.get("/",noAdmin, function (request, response) {
+    //connect();
     response.render("index.ejs", { isUserLoggedIn: request.isAuthenticated() });
 });
+
+app.get("/Admin",isAdmin, function (request, response) {
+    response.render("Admin.ejs")
+});
+
 
 
 app.get("/logIn", checkAuthenticated, function (request, response) {
@@ -192,27 +190,27 @@ app.get("/logIn", checkAuthenticated, function (request, response) {
 
 
 
-app.get("/SignUp", checkAuthenticated, function (request, response) {
+app.get("/SignUp",noAdmin, checkAuthenticated, function (request, response) {
     response.render("SignUp.ejs");
 });
 
 
-app.get("/About", function (request, response) {
+app.get("/About",noAdmin, function (request, response) {
     response.render("About.ejs")
 });
 
-app.get("/Careers", function (request, response) {
+app.get("/Careers",noAdmin, function (request, response) {
     response.render("Careers.ejs")
 });
 
-app.get("/CustomerSupport", function (request, response) {
+app.get("/CustomerSupport",noAdmin, function (request, response) {
     response.render("CustomerSupport.ejs")
 });
 
-app.get('/profile', checkNotAuthenticated, function (request, response) {
+app.get('/profile', noAdmin,checkNotAuthenticated, function (request, response) {
     response.render('profile.ejs');
 });
-app.get("/personal_Info", checkNotAuthenticated, function (request, response) {
+app.get("/personal_Info",noAdmin, checkNotAuthenticated, function (request, response) {
     User.findById(request.user.id, function (err, data) {
         if (err) console.log(err)
 
@@ -232,20 +230,28 @@ app.get("/personal_Info", checkNotAuthenticated, function (request, response) {
 
 
 });
-app.get("/Reservation", checkNotAuthenticated, function (request, response) {
+app.get("/Reservation",noAdmin, checkNotAuthenticated, function (request, response) {
 
     response.render("Reservation.ejs")
 });
-app.get("/payment", checkNotAuthenticated, function (request, response) { // we need to check if the customer has chosen a room before going to this page
+app.get("/payment",noAdmin, checkNotAuthenticated, function (request, response) { // we need to check if the customer has chosen a room before going to this page
     response.render("payment.ejs")
 });
-app.get('/Bookings', function (request, response) {
-    // HERE SALEH!!!
-    // console.log(request.user.userID)
-    // booking.find(UserID: )
-    response.render('Bookings.ejs');
-
+app.get('/Bookings',checkNotAuthenticated, function (request, response) {    
+    booking.find({ UserID: request.user.UserID},  function (err, docs) {
+        if (err){
+            console.log(err);
+        }
+        else{
+            console.log(docs[0].Check_in)
+            
+            response.render('Bookings.ejs',{data: docs});
+        }
+    });   
 });
+
+
+
 
 
 app.post("/Index", checkNotAuthenticated, function (request, response) {
@@ -354,5 +360,12 @@ function isAdmin(request, response, next) {
         return next()
     } else {
         return response.redirect("/");
+    }
+}
+function noAdmin(request, response, next) {
+    if (request.isAuthenticated() && request.user.Admin === true) {
+        return response.redirect("/Admin");
+    } else {
+        return next();
     }
 }
