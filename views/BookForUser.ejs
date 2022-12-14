@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="adminStyle.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <title>Book for user</title>
+</head>
+
+<body>
+	<header>
+		<ul id="navigation">
+			<li><a id="logo" href="/">Overlook</a></li>
+		</ul>
+	</header>
+<div id="maindiv">
+  <form action="/BookForUser" method="post">
+  
+    <div class="Bookingcontainer">
+        <div class="Bookingitem">
+            <label>Check in</label> <br>
+            <input class="bookinginput" name="Check_in" id="dateIn" type="date" required style="width: 50%;">
+        </div>
+
+        <div class="Bookingitem">
+<label>Check out</label> <br>
+            <input class="bookinginput"  name="Check_out" id="dateOut"type="date" max="" required style="width: 50%;">
+        </div>
+
+
+<div class="elem-group">
+  <label for="Room_type">Room Type</label>
+  <select id="Room_type" name="Room_type" required style="width: 50%;">
+      <option name="small">small</option>
+      <option name="medium">medium</option>
+      <option name="large">large</option>
+      <option name="Luxurious_small">Luxurious_small</option>
+      <option name="Luxurious_medium">Luxurious_medium</option>
+      <option name="Luxurious_large">Luxurious_large</option>
+</div>
+
+  </select>
+  <div class="elem-group">
+    <label for="userID">Choose a customer</label>
+    <select id="userID" name="userID" required style="width: 50%;">
+        
+      <% for (var i = 0; i < Users.length; i++) { %>
+        
+        
+        <option name=""> <%= Users[i].email %></option>
+        
+        <% } %>
+  </div>
+  
+    </select>
+<br><br>
+
+<button type="submit">Book Room</button>
+</form>
+</div>
+
+
+</body>
+</html>

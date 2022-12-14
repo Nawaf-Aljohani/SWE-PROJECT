@@ -100,7 +100,7 @@ align-items: center;
 
 .sidebar ul li a:hover{
 
-    color: #021e90;
+    color: #4683d5;
     background: #fff;
 }
 
@@ -145,7 +145,7 @@ form .grid-container{
    font-size: 1rem;
    font:bold;
    cursor: pointer;
-   background-color: #021e90;
+   background-color: #4683d5;
    color: #fff;
    
 }
@@ -153,7 +153,7 @@ form .grid-container{
 .Edit_Info_btn:hover {
 
     background-color: #fff;
-    color: #021e90;
+    color: #4683d5;
     transition: 0.3s;
 
 }
@@ -171,6 +171,20 @@ form .grid-container{
     position: absolute;
     top: 0;
     display: none;
+}
+.Booking_Btns{
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0,0.7);
+    opacity: 0.7;
+    position: absolute;
+    top: 0;
+    display: none;
+
 }
 
 .edit_info_model_content{
@@ -243,7 +257,7 @@ form .grid-container{
     border-radius: 10px;
     border: 1px solid gray;
     font-size: 15px;
-    background-color: #021e90;
+    background-color: #4683d5;
     color: #fff;
     cursor: pointer;
 }
@@ -251,7 +265,7 @@ form .grid-container{
 .Update_info_btn:hover{
 
     background-color: #fff;
-    color: #021e90;
+    color: #4683d5;
     transition: 0.3s;
 }
 
@@ -291,8 +305,68 @@ form .grid-container{
     color: 021e90;
     border: 1px solid gray;
     padding: 20px;
-    text-align: center;
+    text-align: left;
+
 }
+
+.Bookin_Btns button{
+
+    padding: 10px 20px;
+    margin: 25px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    font-size: 15px;
+    background-color: #4683d5;
+    color: #fff;
+    cursor: pointer;
+ 
+}
+
+.Bookin_Btns button:hover{
+
+    background-color: #fff;
+    color: #4683d5;
+    transition: 0.3s;
+}
+
+.Bookin_Btns input{
+
+    padding: 10px 20px;
+    margin: 25px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    font-size: 15px;
+    background-color: #4683d5;
+    color: #fff;
+    cursor: pointer;
+ 
+}
+
+.roomNumber{
+
+    display: none;
+
+}
+
+.Bookin_Btns input:hover{
+
+    background-color: #fff;
+    color: #4683d5;
+    transition: 0.3s;
+}
+
+/* .Edit_Bookings_Btn {
+
+   margin: 0;
+
+}
+
+.Cancel_Bookings_Btn {
+
+    margin: 0 auto;
+
+} */
+
 
 
 .profile_content  h1{

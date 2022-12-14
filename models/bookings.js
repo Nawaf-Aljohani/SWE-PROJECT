@@ -3,11 +3,9 @@ const Schema   = mongoose.Schema;
 
 const bookingSchema = new Schema({
 
-    UserID:{
-        
-        type:Number,
+    UserID:{   
+        type:Number, // might make it string
         required:true
-
     },
     Room_Number:{
         type:Number,
@@ -21,14 +19,13 @@ const bookingSchema = new Schema({
 
     },
     Check_out:{
-
         type:String,
         required:true
-
     }
 
     
 
 });
-const Booking = mongoose.model('Booking',bookingSchema);
-module.exports = Booking;
+
+const booking = mongoose.model('booking',bookingSchema);
+module.exports = booking;

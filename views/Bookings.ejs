@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,36 +57,83 @@
 
 
     <div class="profile_content">
+      
         <h1>Bookings</h1>
 
-        <% for (var i = 0; i < data.length; i++) { %>
-            <%= data[i].Room_Number %>
-            <hr>
-            <%= data[i].Check_in %>
-            <hr>
-            <%= data[i].Check_out %>
-            <hr>
-            
-
-
-
-
-            <% } %>
-
+       
         <div class="grid-container-bookings">
 
 
-            <div class="grid-booking">
+           
+                
+            <% if (data.length > 0 ) { %>
+                <% for (var i = 0; i < data.length; i++)  { %>
+                <div class="grid-booking">
+                    <form action="/Bookings" method="post">
+                    <label for="RoomNumber">Room Number: </label>
+                    <%= data[i].Room_Number %>
+                    <input class="roomNumber" type="text" name="roomNumber" value= <%= data[i].Room_Number %>>
+                    <hr>
+                    <label for="Check_in">CheckIn: </label>
+                    <%= data[i].Check_in %>
+                    <hr>
+                    <label for="Check_out">CheckOut: </label>
+                    <%= data[i].Check_out %>
+                    <hr>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="Bookin_Btns">
+                        <!-- <button id="Edit_Bookings_Btn" class="Edit_Bookings_Btn">Edit</button> -->
+                        
+                        
+                        <input id="Cancel_Bookings_Btn" class="Cancel_Bookings_Btn"  type="submit" value="Cancel">
 
-            </div>
+                        </form>
 
+                        <!-- <form action="/Bookings" method="PUT">
+                        
+                            <input id="Update_Bookings_Btn" class="Update_Bookings_Btn" type="submit" value="Update">
+                            </form> -->
+
+                        <!-- <button id="Cancel_Bookings_Btn" class="Cancel_Bookings_Btn">Cancel</button> -->
+
+                        
+
+                    </div>
+                   
+                            
+                
+                    </div>
+                    
+               
+            <% } %>
+
+            <% } else { %>
             <p>There are no bookings to display </p>
+            <% } %>
 
-        </div>
-
+           
+       
 
     </div>
 
 </body>
 
+<script >
+    
+    document.getElementById('Edit_Bookings_Btn').addEventListener('click',
+    () => {
+        document.querySelector('.Booking_Btns').style.display = 'flex';
+    });
+
+    document.getElementById('close_Update_form').addEventListener('click', 
+    ()=>{
+        document.querySelector('.Booking_Btns').style.display = 'none';
+    });
+
+
+</script>
+
 </html>
+

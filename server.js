@@ -1,3 +1,5 @@
+//nawaf
+
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
@@ -14,6 +16,7 @@ const User = require('./models/user.js')
 const Rooms = require('./models/Rooms.js')
 const booking = require('./models/bookings.js')
 const { render } = require('ejs')
+let alert = require('alert');
 
 //mongodb+srv://admin:admin@cluster0.3yhleww.mongodb.net/?retryWrites=true&w=majority
 
@@ -55,7 +58,6 @@ passport.use(new LocalStrategy({
         if (user == null) {
             return done(null, false, { message: 'No user with that email' })
         }
-
         bcrypt.compare(password, user.password, function (err, res) {
             if (err) return done(err);
             if (res === false) return done(null, false, { message: 'Incorrect password.' });
@@ -71,105 +73,6 @@ passport.deserializeUser(function (id, done) {
     User.findById(id, function (err, user) {
         done(err, user);
     })
-}
-
-
-)
-
-
-
-
-let alert = require('alert');
-app.get("/Add_Room", isAdmin, function (request, response) {
-    response.render("Add_Room.ejs");
-
-
-});
-app.post("/Add_Room", async function (request, response) {
-    const exists = await Rooms.exists({ roomNum: request.body.roomNumber })
-    if (exists) {
-        response.redirect("/Add_Room");
-        alert("Room already exists")
-        return;
-    }
-    const newRoom = new Rooms(
-        {
-            roomNum: request.body.roomNumber,
-            discribtion: request.body.desc,
-            type: request.body.room_type,
-        })
-    newRoom.save();
-    alert("Room added")
-    response.redirect("/Add_Room")
-
-
-});
-
-
-app.get("/delete_Room", isAdmin, function (request, response) {
-    response.render("delete_Room.ejs");
-
-});
-
-app.post("/delete_Room", async function (request, response) {
-
-    const exists = await Rooms.exists({ roomNum: request.body.roomNumber })
-
-    if (exists) {
-        roomNumberx = await Rooms.find({ roomNum: request.body.roomNumber })
-
-
-        if (!roomNumberx[0].Reserved) {
-            await Rooms.deleteOne({ roomNum: request.body.roomNumber });
-            alert("Room deleted")
-        } else {
-            alert("Room cannot be deleted (it is reserved)")
-
-        }
-    }
-    else {
-        alert("No rooms with that number")
-
-    }
-    response.redirect("/delete_Room")
-
-
-});
-
-
-
-// app.get("/book_room", isAdmin, function (request, response) {
-//     app.render("book_room.ejs")
-// })
-
-// app.post("/book_room", async function (request, response) {
-//     const exists = await Rooms.exists({ roomNum: request.body.roomNumber, Reserved: false })
-//     const UserExists = await Rooms.exists({ UserID: request.body.UserID })
-//     try {
-//         if (exists && UserExists) {
-//             roomNumberx = await Rooms.findOneAndUpdate({ roomNum: request.body.roomNumber, Reserved: true })
-//             const newBooking = new bookings({
-//                 UserID: request.body.UserID,
-//                 Room_Number: request.body.roomNumber,
-//                 Check_in: request.body.Check_in,
-//                 Check_out: request.body.Check_out,
-//             })
-//             newBooking.save();
-//             alert("Room Booked")
-//             return;
-//         } else {
-//             alert("Error booking a room")
-//         }
-//         response.redirect("/book_room");
-//     } catch {
-//         alert("Major Error");
-//     }
-// });
-
-app.get("/view_bookings", isAdmin, async function (request, response) {
-    const all = await booking.find({}); //this array contains all bookings
-
-    response.render("view_bookings.ejs", { all })
 })
 
 
@@ -243,21 +146,41 @@ app.get('/Bookings', checkNotAuthenticated, function (request, response) {
             console.log(err);
         }
         else {
-            console.log(docs[0].Check_in)
+            //console.log(docs[0].Check_in)
 
             response.render('Bookings.ejs', { data: docs });
         }
     });
 });
 
+app.get("/view_bookings", isAdmin, async function (request, response) {
+    const all = await booking.find({}); //this array contains all bookings
+    response.render("view_bookings.ejs", { all })
+})
 
 
+app.get("/BookForUser", isAdmin, async function (request, response) {
+    const Users_ID = await User.find({ Admin: false })
+    response.render("BookForUser.ejs", { Users: Users_ID })
+})
+app.get("/CancelBookingOfUser", isAdmin, async function (request, response) {
+    const Bookings = await booking.find({})
+    response.render("CancelBookingOfUser.ejs", { Rooms: Bookings })
+})
+
+
+app.get("/Add_Room", isAdmin, function (request, response) {
+    response.render("Add_Room.ejs");
+});
 
 
 app.post("/Index", checkNotAuthenticated, function (request, response) {
     response.redirect("/Reservation")
 });
+app.get("/delete_Room", isAdmin, function (request, response) {
+    response.render("delete_Room.ejs");
 
+});
 
 app.post("/SignUp", async function (request, response) {
     try {
@@ -267,7 +190,6 @@ app.post("/SignUp", async function (request, response) {
             response.redirect("/logIn");
             return;
         }
-
 
         const hashedPassword = await bcrypt.hash(request.body.password, 10)
         const newUser = new User({
@@ -321,6 +243,77 @@ app.post("/payment", checkNotAuthenticated, async function (request, response) {
 
 });
 
+
+
+app.post("/CancelBookingOfUser", checkNotAuthenticated, async function (request, response) {
+    try {
+        let RoomChangereserve = await Rooms.findOne({ roomNum: request.body.RoomNumber })
+        let bookCancel = await booking.findOne({ Room_Number: request.body.RoomNumber })
+        booking.findByIdAndDelete()
+        await booking.findByIdAndDelete(bookCancel.id)
+        await Rooms.findByIdAndUpdate(RoomChangereserve.id, { Reserved: false },)
+    } catch (error) {
+        console.log(error)
+    }
+    response.redirect("/CancelBookingOfUser")
+})
+
+app.post("/BookForUser", checkNotAuthenticated, async function (request, response) {
+    try {
+        let RoomData = await Rooms.findOne({ type: request.body.Room_type, Reserved: false })
+        await Rooms.findByIdAndUpdate(RoomData.id, { Reserved: true })
+        console.log(request.body.userID)
+        let userx = await User.findOne({email:request.body.userID});
+        const newBooking = new booking(
+            {
+                UserID: userx.UserID,
+                Room_Number: RoomData.roomNum,
+                Check_in: request.body.Check_in,
+                Check_out: request.body.Check_out
+            })
+        const saveBooking = await newBooking.save();
+    } catch (error) {
+        console.log(error)
+    }
+    response.redirect("/BookForUser")
+})
+
+
+
+app.post("/Add_Room", async function (request, response) {
+    const exists = await Rooms.exists({ roomNum: request.body.roomNumber })
+    if (exists) {
+        response.redirect("/Add_Room");
+        alert("Room already exists")
+        return;
+    }
+    const newRoom = new Rooms(
+        {
+            roomNum: request.body.roomNumber,
+            discribtion: request.body.desc,
+            type: request.body.room_type,
+        })
+    newRoom.save();
+    alert("Room added")
+    response.redirect("/Add_Room")
+});
+
+
+
+app.post("/delete_Room", async function (request, response) {
+    const exists = await Rooms.exists({ roomNum: request.body.roomNumber })
+    if (exists) {
+        roomNumberx = await Rooms.find({ roomNum: request.body.roomNumber })
+
+        if (!roomNumberx[0].Reserved) {
+            await Rooms.deleteOne({ roomNum: request.body.roomNumber });
+            alert("Room deleted")
+        } else { alert("Room cannot be deleted (it is reserved)") }
+    }
+    else { alert("No rooms with that number") }
+    response.redirect("/delete_Room")
+});
+
 app.delete('/logout', (request, response) => {
     request.logOut(function (error) {
         if (error) {
@@ -329,6 +322,43 @@ app.delete('/logout', (request, response) => {
         response.redirect('/')
     })
 })
+
+
+
+app.post('/Bookings', async (req, res) => {
+
+    try {
+        const bookings = await booking.exists({ UserID: req.user.UserID })
+
+        if (bookings) {
+            let RoomData = await Rooms.findOne({ roomNum: req.body.roomNumber })
+            let update = await Rooms.findByIdAndUpdate(RoomData.id, { Reserved: false })
+            res.redirect('/Bookings')
+            await booking.deleteOne({ Room_Number: req.body.roomNumber })
+        }
+    } catch {console.log('There are no Bookings to display');}
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 app.listen(port, hostname, function () {
@@ -344,7 +374,6 @@ function checkAuthenticated(request, response, next) {
     next();
 
 }
-
 
 function checkNotAuthenticated(request, response, next) {
     if (request.isAuthenticated()) {

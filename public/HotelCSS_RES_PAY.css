@@ -154,7 +154,13 @@ h3:hover {
     border-radius: 5px;
     cursor: pointer;
 }
-
+select {
+	padding: 1rem;
+	border: none;
+	border-radius: 5px;
+	background-color: #e7e7e7b4;
+	font-family: 'Sora', sans-serif;
+}
 
 
 .forms {
@@ -166,12 +172,27 @@ h3:hover {
 form {
     font-size: 1.3em;
     margin: auto;
+    
 }
 
 .alt_form {
     font-size: 1.2em;
+    width: 100%;
+
     margin: auto;
 }
+.nonedit {
+    font-size: 1.2em;
+    margin: auto;
+    border: none;
+
+}
+.nonedit:focus  {
+    margin: auto;
+    border: none;
+    outline: none;
+}
+
 
 fieldset {
     border-color: rgb(0, 0, 0);
@@ -187,17 +208,27 @@ fieldset {
 }
 
 .center_div {
-
+width: 80%;
     margin-left: auto;
-
     margin-right: auto;
-
-    background-color: rgb(229, 232, 233);
-
     text-align: left;
-
     column-count: 2;
-
     padding: 10px;
+
+}
+
+
+#booktheroombtn{
+	background-color: #508dff;
+	border: none;
+	color: white;
+	padding: 1rem;
+	text-decoration: none;
+	margin-top: 1rem;
+	cursor: pointer;
+	font-size: large;
+	border-radius: 4px;
+	font-family: 'Sora', sans-serif;
+
 
 }

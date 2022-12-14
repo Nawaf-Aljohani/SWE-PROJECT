@@ -36,26 +36,20 @@
     <div class="forms">
         <form action="/payment" method="post">
             <fieldset>
-                                <div class="center_div">
-                                    <label><b>Room type:</b></label> <br><br>
-                                        <input class="alt_form_1" type="text" name="Room_type" id="Room_type"
-                         readonly="true" />
-                                    <h4><label><b>Check in date:</b></label></h4>
-                                        <input class="alt_form_1" type="text" name="Check_in" id="Check_in"
-                         readonly="true" />
-                                    <h4> <label><b>Check out date:</b></label></h4>
-                                        <input class="alt_form_1" type="text" name="Check_out" id="Check_out"
-                         readonly="true" />    
-                                    <h4><label><b>Room price:</b></label></h4>
-                                        <input class="alt_form_1" type="text" name="Room_price" id="Room_price"
-                         readonly="true" />
-                                    <h4> <label><b>Total days staying:</b></label></h4>
-                                        <input class="alt_form_1" type="text" name="Total_days" id="Total_days"
-                         readonly="true" />
-                                    <h4> <label><b>Total price:</b></label></h4>
-                                        <input class="alt_form_1" type="text" name="Total_price" id="Total_price"
-                        readonly="true" />
-                                    </div>
+                <div class="center_div">
+                    <label><b>Room type:</b></label> <br><br>
+                    <input class="alt_form nonedit" type="text" name="Room_type" id="Room_type" readonly="true" />
+                    <h4><label><b>Check in date:</b></label></h4>
+                    <input class="alt_form nonedit" type="text" name="Check_in" id="Check_in" readonly="true" />
+                    <h4> <label><b>Check out date:</b></label></h4>
+                    <input class="alt_form nonedit" type="text" name="Check_out" id="Check_out" readonly="true" />
+                    <h4><label><b>Room price:</b></label></h4>
+                    <input class="alt_form nonedit" type="text" name="Room_price" id="Room_price" readonly="true" />
+                    <h4> <label><b>Total days staying:</b></label></h4>
+                    <input class="alt_form nonedit" type="text" name="Total_days" id="Total_days" readonly="true" />
+                    <h4> <label><b>Total price:</b></label></h4>
+                    <input class="alt_form nonedit" type="text" name="Total_price" id="Total_price" readonly="true" />
+                </div>
 
 
 
@@ -79,7 +73,7 @@
                         const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
                         const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
 
-                        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+                        return Math.floor(((utc2 - utc1) / _MS_PER_DAY)+1);
                     }
 
                 </script>
@@ -89,12 +83,12 @@
 
                 <p><label><b>Card number:</b></label>
                 <p>
-                    <input class="alt_form" type="text" name="Card_number" size="30" placeholder="4212421343144215" />
-                <p><label><b>CC:</b></label>
+                    <input class="alt_form" type="text" name="Card_number"  />
+                <p><label><b>CVV :</b></label>
                 <p>
-                    <input class="alt_form" type="text" name="Card_number" size="2" />
+                    <input class="alt_form" type="text" name="Card_number" />
 
-                <p><label><b>Month: &emsp;&emsp;&emsp;&emsp;&emsp;Year:</b></label>
+                <p><label><b>Month:</b></label>
                 <p>
                     <select class="alt_form" name="Month" id="Month">
                         <option value="1-January">1-January</option>
@@ -110,8 +104,8 @@
                         <option value="11-November">11-November</option>
                         <option value="12-December">12-December</option>
                     </select>
-
-                    <select class="alt_form" name="Year" id="Year">
+                    <p><label><b>Year:</b> </label></p>
+                    <select class="alt_form" name="Year" id="Year" >
                         <option value="2022">2022</option>
                         <option value="2023">2023</option>
                         <option value="2024">2024</option>
@@ -133,10 +127,10 @@
                 <input class="alt_form" type="text" name="Last_name" size="30" />
                 <p><label><b>Email:</b></label>
                 <p>
-                    <input class="alt_form" type="text" name="Email" size="30" placeholder="myEmail@gmail.com" />
+                    <input class="alt_form" type="email" name="Email" size="30" />
                 <p><label><b>Phone:</b></label>
                 <p>
-                    <input class="alt_form" type="text" name="Phone" size="30" placeholder="996555555555" />
+                    <input class="alt_form" type="text" name="Phone" size="30" />
                 <p><label><b>Country/Region:</b></label>
                 <p>
                     <input class="alt_form" type="text" name="Country" size="30" />
@@ -150,7 +144,7 @@
                 <p><label><b>City:</b></label>
                 <p>
                     <input class="alt_form" type="text" name="City" size="30" />
-                    <input type="submit">
+                    <br><input type="submit" value="Book room" id="booktheroombtn">
             </fieldset>
         </form>
     </div>
